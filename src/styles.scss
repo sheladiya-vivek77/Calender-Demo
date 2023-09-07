@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+.cal-day-cell {
+    height: auto !important;
+    min-height: 200px !important;
+    width: auto !important;
+    min-width: 200px !important;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+.cal-day-badge {
+    display: none !important;
+}
+
+.cal-cell-top {
+    min-height: 50px !important;
+}
+
+.cal-month-view .cal-cell-row .cal-cell:hover::before,
+.cal-month-view .cal-cell.cal-has-events.cal-open {
+    opacity: 1;
+}
+
+.show-add-event {
+    .cal-in-month {
+        &.cal-day-cell::before {
+            content: "Add Event";
+            font-size: 15px;
+            position: absolute;
+            top: 10%;
+            left: 19%;
+            text-align: center;
+            transition: opacity 0.3s;
+            border: 1px dashed;
+            opacity: 0;
+            padding: 0px 37px;
+            height: 33px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 9px;
+        }
+    }
+}
+
+.cal-draggable {
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+    opacity: 0 !important;
+}
+
+.cards {
+    border: 1px solid #fffefe;
+    border-radius: 5px;
+    margin: 20px;
+    width: 100%;
+    overflow: hidden;
+    width: 215px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    .cards-headers {
+        display: flex !important;
+        align-items: start;
+    }
+    .cards-footer {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        img {
+            height: 13px;
+            width: 13px;
+        }
+        span {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+    }
+    .avtar-icon {
+        margin-top: 10px;
+        width: 100%;
+        object-fit: cover;
+        height: 80px;
+        border-radius: 5px;
+    }
+    h3 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

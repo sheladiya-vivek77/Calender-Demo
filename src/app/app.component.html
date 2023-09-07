@@ -1,0 +1,81 @@
+<div class="row px-5 pt-5">
+  <div class="col-6 text-center">
+    <h3 class="m-0">{{ viewDate | date:'MMMM yyyy' }}</h3>
+  </div>
+  <div class="col-6">
+    <div class="text-end">
+      <div class="btn-group">
+        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false" (click)="letsShowEvent()">
+          Previous
+        </div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (click)="letsShowEvent()">
+          Today
+        </div>
+        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="activeDayIsOpen = false" (click)="letsShowEvent()">
+          Next
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-5" [ngClass]="checkDateSameOrNot ? 'show-add-event':''">
+  <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" (eventTimesChanged)="eventTimesChanged($event)"
+    (dayClicked)="dayClicked($event.day)" [refresh]="refresh"></mwl-calendar-month-view>
+</div>
+
+
+<button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal" id="demo-id">
+  Event modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Event In <span class="model-event-date">
+            {{ eventDate | date:'dd MMM yyyy' }}
+          </span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal-close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <form [formGroup]="modalForm">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Event name</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter event name"
+                formControlName="event_name">
+              <div *ngIf="isSubmit && modalForm.controls.event_name.errors">
+                <p class="text-danger m-0 error-req">Event name is required</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Event description</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Event description"
+                formControlName="event_desc">
+              <div *ngIf="isSubmit && modalForm.controls.event_desc.errors">
+                <p class="text-danger m-0 error-req">Event description is required</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Select image for event</label>
+              <input type="file" class="form-control" (change)="onChangeFile($event)" accept=".jpeg, .jpg, .png"
+                id="exampleInputPassword1" placeholder="Select image" formControlName="event_image">
+              <div *ngIf="isSubmit && !selectedImage">
+                <p class="text-danger m-0 error-req">Please select one image</p>
+              </div>
+            </div>
+          </form>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="saveModelDetails()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
